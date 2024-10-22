@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "form-data": "^4.0.1",
+    "nodemon": "^3.1.7"
+  }
+}

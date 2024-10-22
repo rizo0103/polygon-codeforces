@@ -1,8 +1,11 @@
 const express = require('express');
-const multer = require('multer');
-const axios = require('axios');
-
 const app = express();
-const upload = multer({ dest: 'uploads/' });
 
+const polygonRoutes = require('./polygonApi');
+const port = 5170;
 
+app.use('/', polygonRoutes);
+
+app.listen(port, () => {
+    console.log(`Server listens http://localhost:${port}`);
+});
