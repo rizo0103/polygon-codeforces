@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import { back } from '../../public/template';
 
 const Main = () => {
   const [code, setCode] = useState('');
@@ -12,7 +13,7 @@ const Main = () => {
   const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-          const response = await axios.post('http://localhost:3000/compile', {
+          const response = await axios.post(`${back}/compile`, {
               code,
               input
           });

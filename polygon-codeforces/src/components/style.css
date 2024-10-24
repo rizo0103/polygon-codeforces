@@ -1,0 +1,42 @@
+.add-task-form {
+    display: grid;
+    width: 80%;
+    height: auto;
+    justify-self: center;
+    justify-items: center;
+}
+
+.task-container {
+    display: flex; 
+    width: 50%;
+    flex-direction: column; 
+    text-align: start;
+}
+
+.task-data {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5%;
+    /* border: none; */
+}
+
+.task-data-label {
+    margin-bottom: 1%;
+}
+
+.task-statement {
+    width: 70%;
+}
+
+.submit-part {
+    display: flex;
+    margin-top: 5%;
+    width: 70%;
+    justify-content: center;
+}
+
+.submit-part button {
+    width: 50%;
+}
+
