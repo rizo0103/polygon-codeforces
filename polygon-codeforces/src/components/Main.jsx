@@ -1,51 +1,46 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
 import axios from 'axios';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { back } from '../../public/template';
+import './style.css';
 
 const Main = () => {
-  const [code, setCode] = useState('');
-  const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
-  const [error, setError] = useState('');
+    const [tasks, setTasks] = useState([]);
 
-  const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-          const response = await axios.post(`${back}/compile`, {
-              code,
-              input
-          });
-          setOutput(response.data.output);
-          setError('');
-      } catch (err) {
-          setOutput('');
-          setError(err.response.data.error);
-      }
-  };
+    const getData = async () => {
+        try {
+            const response = await fetch(`${back}/get-tasks-list`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
 
-  return (
-      <div>
-          <h1>Code Compiler</h1>
-          <form onSubmit={handleSubmit}>
-              <div>
-                  <label htmlFor="code">Code:</label>
-                  <textarea id="code" value={code} onChange={(e) => setCode(e.target.value)} rows="10" cols="50"></textarea>
-              </div>
-              <div>
-                  <label htmlFor="input">Input (optional):</label>
-                  <textarea id="input" value={input} onChange={(e) => setInput(e.target.value)} rows="5" cols="50"></textarea>
-              </div>
-              <button type="submit">Submit</button>
-          </form>
-          <div>
-              <h2>Output</h2>
-              <pre>{output}</pre>
-              {error && <pre style={{ color: 'red' }}>{error}</pre>}
-          </div>
-      </div>
-  );
-}
+            setTasks(data.results);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    
+    useEffect(() => {
+        getData();
+    }, []);
 
-export default Main
+    return (
+        <main className='main-page'>
+            <h1> Tasks </h1>
+            <div className='tasks-container'>
+                {tasks && tasks.length > 0 ? tasks.map((element, index) => (
+                    <div key={index} className='task-title'>
+                        <div className='task-id'> {element.id} </div>
+                        <div className='task-name' onClick={() => window.location.href = `/task/${element.id}`}> {element.title} </div>
+                        <div className='task-time-limit'> {element.timeLimit} (ms) </div>
+                    </div>
+                )) : <p>No tasks available</p>}
+            </div>
+        </main>
+    );
+};
+
+export default Main;

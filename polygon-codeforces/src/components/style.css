@@ -39,4 +39,60 @@
 .submit-part button {
     width: 50%;
 }
+/* 
+.main-page {
+    display: grid;
+    justify-content: center;
+} */
 
+
+.task-title {
+    display: flex;
+    cursor: pointer;
+    width: 50%;
+    height: 70px;
+    justify-self: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    font-size: larger;
+    margin-bottom: 5%;
+}
+
+.task-id {
+    display: flex;
+    width: 10%;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    cursor: pointer;
+}
+
+.task-name {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    width: 80%;
+    height: 100%;
+    margin-left: 5%;
+    transition: .75s ease-in-out;
+}
+
+.task-name:hover {
+    color: #747bff;
+    filter: drop-shadow(10px 0 1 #747bff);
+}
+
+.task-time-limit {
+    display: flex;
+    font-size: larger;
+    align-content: center;
+}
+
+.task-detail-page {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    height: auto;
+}

@@ -1,47 +1,53 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { back } from '../../public/template';
 
-const Compiler = () => {
+const Compiler = ({ message }) => {
     const [code, setCode] = useState('');
-    const [input, setInput] = useState('');
-    const [output, setOutput] = useState('');
+    const [ans, setAns] = useState([]);
     const [error, setError] = useState('');
   
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(code);
+        
         try {
-            const response = await axios.post(`${back}/compile`, {
-                code,
-                input
+            const response = await fetch(`${back}/compile`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    code: code,
+                    id: message.id,
+                })
             });
-            setOutput(response.data.output);
-            setError('');
+            const data = await response.json();
+            setAns(data.answers);
         } catch (err) {
-            setOutput('');
             setError(err.response.data.error);
         }
     };
   
     return (
         <div>
-            <h1>Code Compiler</h1>
+            <h1>Send Code:</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="code">Code:</label>
-                    <textarea id="code" value={code} onChange={(e) => setCode(e.target.value)} rows="10" cols="50"></textarea>
+                    <textarea id="code" rows="10" cols="50" value={code} onChange={(e) => setCode(e.target.value)}></textarea><br />
+                    <button type="submit">Submit</button>
                 </div>
-                <div>
-                    <label htmlFor="input">Input (optional):</label>
-                    <textarea id="input" value={input} onChange={(e) => setInput(e.target.value)} rows="5" cols="50"></textarea>
-                </div>
-                <button type="submit">Submit</button>
+                <h2> {ans.map((item, index) => {
+                        return (
+                            <div key={index}>{item}<br /></div>
+                        )
+                    })} </h2>
             </form>
             <div>
-                <h2>Output</h2>
-                <pre>{output}</pre>
+                {/* <pre>{output}</pre> */}
                 {error && <pre style={{ color: 'red' }}>{error}</pre>}
             </div>
         </div>

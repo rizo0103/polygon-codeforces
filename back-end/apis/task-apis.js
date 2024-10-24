@@ -14,20 +14,44 @@ router.get('/test', async (req, res) => {
 });
 
 router.post('/compile', async(req, res) => {
-    const { code, input } = req.body;
+    const { code, id } = req.body;
     const envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } };
 
     try {
-        compiler.compileCPPWithInput(envData, code, "5 5 5", async (data) => {
-            console.log(data);
-            if (data.error) {
-                return res.status(500).json({ error: data.error });
-            } else {
-                if (data.output === 'hello') {
-                    return res.json({ output: 'correct' });
-                } else {
-                    return res.json({ output: 'incorrect' });
-                }
+
+        const sql = `SELECT * FROM tasks WHERE id = ${id}`;
+        let inputData = [], outputData = [];
+
+        tasks.query(sql, async(err, results) => {
+            if (err) {
+                console.error(err);
+                return res.status(422).json({ message: `db error ${err}` });
+            }
+            inputData = [...results];
+            outputData = [...results];
+            let str = inputData[0].inputs;
+            let otr = outputData[0].outputs;
+            str = JSON.parse(str);
+            otr = JSON.parse(otr);
+            let ans = [];
+            for (let i = 0; i < str.length; ++i) {
+                compiler.compileCPPWithInput(envData, code, str[i], async (data) => {
+                    if (data.error) {
+                        return res.status(500).json({ error: data.error });
+                    } else {
+                        if (data.output === otr[i]) {
+                            // console.log("correct");
+                            ans[i] = "correct";
+                            // return res.json({ output: 'correct' });
+                        } else {
+                            ans[i] = 'incorrect';
+                            // console.log("incorrect");
+                        }
+                    }
+                    if (i === str.length - 1) {
+                        return res.status(200).json({ answers: ans });
+                    }
+                });
             }
         });
     } catch (error) {
@@ -60,6 +84,44 @@ router.post('/add-task', async(req, res) => {
             return res.status(201).json({ message: 'task was created successfully', data: results });
         });
     } catch (error) {
+        return res.status(500).json({ error: `Internal server error: ${error}` });
+    }
+});
+
+router.get('/get-tasks-list', async(req, res) => {
+    try {
+        const sql = `SELECT * FROM tasks`;
+
+        tasks.query(sql, async(err, results) => {
+            if (err) {
+                console.error(err);
+                return res.status(422).json({ message: `db error: ${err}` });
+            }
+
+            return await res.status(200).json({ message: 'successfully got data from db', results: results });
+        });
+    } catch (error){
+        console.error(error);
+        return res.status(500).json({ error: `Internal server error: ${error}` });
+    }
+});
+
+router.get('/get-task-details/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const sql = `SELECT * FROM tasks WHERE id = ${id}`;
+
+        tasks.query(sql, async (err, results) => {
+            if (err) {
+                console.error(err);
+                return await res.status(422).json({ message: `db error ${err}` });
+            }
+
+            return await res.status(200).json({ message: 'successfully got data from db', results: results });
+        });
+    } catch (error) {
+        console.error(error);
         return res.status(500).json({ error: `Internal server error: ${error}` });
     }
 });
