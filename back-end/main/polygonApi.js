@@ -1,15 +1,33 @@
-const express = require('express'), 
-      router = express(), 
-      axios = require('axios'),
-      multer = require('multer');
+const express = require('express');
+const multer = require('multer');
+const { polygonRequest } = require('./functions');
 
-const POLYGON_API_KEY = 'd5a4a7344a4107592931c6a08efb03f41ebf2438';
-const POLYGON_API_SECRET = '2fb143bf751d97f0572bc567d3ac4dc9da320d77';
-
+const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
-router.get('/get', async(req, res) => {
-    console.log('Hello, World!');
+// Маршрут для загрузки файла задачи и проверки решения
+router.post('/submit', upload.single('solutionFile'), async (req, res) => {
+  const file = req.file;
+  const problemId = req.body.problemId; // ID задачи, которую нужно проверить
+
+  try {
+    // Загрузка файла задачи
+    const uploadFileResponse = await polygonRequest('problem.saveFile', { problemId }, [{ name: 'file', path: file.path }]);
+    console.log('Upload Response:', uploadFileResponse);
+
+    // Здесь будет запрос для проверки решения (предположим, что такой метод существует)
+    const checkResponse = await polygonRequest('problem.check', { problemId });
+    res.send(checkResponse);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Ошибка при загрузке файла или проверке решения');
+  }
+});
+
+router.get('/get', async (req, res) => {
+  console.log('Hello, World!');
+  res.send('Hello, World!');
 });
 
 module.exports = router;
