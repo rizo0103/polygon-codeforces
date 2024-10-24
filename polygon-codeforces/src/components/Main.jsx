@@ -1,7 +1,7 @@
-// eslint-disable-next-line no-unused-vars
-import React from "react";
-import { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 
 const Main = () => {
   const [code, setCode] = useState('');
@@ -45,6 +45,6 @@ const Main = () => {
           </div>
       </div>
   );
-};
+}
 
-export default Main;
+export default Main
