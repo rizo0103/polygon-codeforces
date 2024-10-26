@@ -1,0 +1,70 @@
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #1a1a1a; /* Dark background */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a {
+    color: #ffcc00; /* Accent color for links */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover effect */
+.navbar a:hover {
+    background-color: #404040; /* Subtle background change */
+    color: #66bb6a; /* Brighter color on hover */
+    transform: scale(1.1); /* Slight scaling */
+    box-shadow: 0px 3px 6px rgba(255, 204, 0, 0.3); /* Shadow for effect */
+}
+
+/* Active link styles */
+.navbar a:active {
+    background-color: #2c9a29;
+    color: #fff;
+}
+
+/* Left and Right Flex Containers */
+.navbar-left, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right {
+    gap: 20px; /* Space between links on the right */
+}
+
+/* Animated Underline for Active Link */
+.navbar a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #ffcc00;
+    transition: width 0.3s;
+    margin-top: 5px;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+.navbar:hover {
+    background-color: #292929; /* Slightly lighter shade for navbar on hover */
+    box-shadow: 0px 8px 16px rgba(255, 204, 0, 0.3); /* Glow effect on hover */
+    transform: translateY(-2px); /* Lifts the navbar slightly */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}

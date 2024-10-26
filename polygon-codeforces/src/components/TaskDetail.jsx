@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { back } from '../../public/template';
 import '../styles/style.css';
 import '../styles/task-page.css';
+import '../styles/navbar.css';
 
 const TaskDetail = () => {
     const { id } = useParams();
@@ -43,38 +44,49 @@ const TaskDetail = () => {
     }
 
     return (
-        <div className="problem-page">
-            <div className="problem-container">
-                <h1 className="problem-title">{task.title}</h1>
-                
-                <div className="problem-statement">
-                    <h2>Problem Statement</h2>
-                    <p>{task.statement}</p>
+        <div>
+            <nav className="navbar">
+                <div className="navbar-left">
+                    <a href="/">Main Page</a>
                 </div>
-                
-                <div className="example-box">
-                    <h3>Example</h3>
-                    <p><strong>Input:</strong> {JSON.parse(input)[0]}</p>
-                    <p><strong>Output:</strong> {JSON.parse(output)[0]}</p>
+                <div className="navbar-right">
+                    <a href="/profile">Profile</a>
                 </div>
-                
-                <div className="code-editor">
-                    <h3>Your Code</h3>
-                    <textarea 
-                        value={code} 
-                        onChange={(e) => setCode(e.target.value)} 
-                        rows="10" 
-                        placeholder="Write your solution here..." 
-                    />
-                </div>
-                
-                <button className="submit-button" onClick={handleSubmit}>Submit Solution</button>
+            </nav>
+            <main className="problem-page">
+                <div className="problem-container">
+                    <h1 className="problem-title">{task.title}</h1>
+                    
+                    <div className="problem-statement">
+                        <h2>Problem Statement</h2>
+                        <p>{task.statement}</p>
+                    </div>
+                    
+                    <div className="example-box">
+                        <h3>Example</h3>
+                        <p><strong>Input:</strong> {JSON.parse(input)[0]}</p>
+                        <p><strong>Output:</strong> {JSON.parse(output)[0]}</p>
+                    </div>
+                    
+                    <div className="code-editor">
+                        <h3>Your Code</h3>
+                        <textarea 
+                            value={code} 
+                            onChange={(e) => setCode(e.target.value)} 
+                            rows="10" 
+                            placeholder="Write your solution here..." 
+                        />
+                    </div>
+                    
+                    <button className="submit-button" onClick={handleSubmit}>Submit Solution</button>
 
-                {/* Result Section */}
-                {/* <div className="result-box">
-                    <p>OK</p>
-                </div> */}
-            </div>
+                    {/* Result Section */}
+                    {/* <div className="result-box">
+                        <p>OK</p>
+                    </div> */}
+                </div>
+            </main>
+
         </div>
     );
 };
