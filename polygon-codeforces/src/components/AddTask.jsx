@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import './style.css';
+import '../styles/style.css';
 import useDynamicHeight from "../../public/useDynamicHeight";
 import axios from "axios";
 import { back } from "../../public/template";

@@ -3,11 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { back } from '../../public/template';
-import './style.css';
-import Compiler from './Compiler';
+import '../styles/style.css';
+import '../styles/task-page.css';
 
 const TaskDetail = () => {
     const { id } = useParams();
+    const [ code, setCode ] = useState('');
+    const [ input, setInput ] = useState([]);
+    const [ output, setOutput ] = useState([]);
     const [task, setTask] = useState(null);
 
     const getTaskDetails = async () => {
@@ -20,10 +23,16 @@ const TaskDetail = () => {
             });
             const data = await response.json();
             setTask(data.results[0]);
+            setInput(data.results[0].inputs);
+            setOutput(data.results[0].outputs);
         } catch (error) {
             console.error(error);
         }
     };
+
+    const handleSubmit = () => {
+
+    }
 
     useEffect(() => {
         getTaskDetails();
@@ -34,18 +43,39 @@ const TaskDetail = () => {
     }
 
     return (
-        <main className='task-detail-page'>
-            <div>
-                <h1>{task.title}</h1>
-                <p>Time Limit: {task.timeLimit} ms</p>
+        <div className="problem-page">
+            <div className="problem-container">
+                <h1 className="problem-title">{task.title}</h1>
+                
+                <div className="problem-statement">
+                    <h2>Problem Statement</h2>
+                    <p>{task.statement}</p>
+                </div>
+                
+                <div className="example-box">
+                    <h3>Example</h3>
+                    <p><strong>Input:</strong> {JSON.parse(input)[0]}</p>
+                    <p><strong>Output:</strong> {JSON.parse(output)[0]}</p>
+                </div>
+                
+                <div className="code-editor">
+                    <h3>Your Code</h3>
+                    <textarea 
+                        value={code} 
+                        onChange={(e) => setCode(e.target.value)} 
+                        rows="10" 
+                        placeholder="Write your solution here..." 
+                    />
+                </div>
+                
+                <button className="submit-button" onClick={handleSubmit}>Submit Solution</button>
+
+                {/* Result Section */}
+                {/* <div className="result-box">
+                    <p>OK</p>
+                </div> */}
             </div>
-            <div>
-                <p>Description: {task.statement}</p>
-            </div>
-            <div>
-                <Compiler message={{ id: task.id }} />
-            </div>
-        </main>
+        </div>
     );
 };
 

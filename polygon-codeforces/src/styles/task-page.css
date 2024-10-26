@@ -1,0 +1,147 @@
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Cartoon-style font */
+}
+
+/* Theme Variables */
+:root {
+    --background-light: #7a7a7a;  /* Darker light background */
+    --background-dark: #000000;   /* Deep black background */
+    --text-light: #2c2c2c;        /* Very dark text for light theme */
+    --text-dark: #e5e5e5;         /* Lighter text for dark theme */
+    --primary-light: #2c9a29;     /* Dark green */
+    --primary-dark: #66bb6a;      /* Slightly brighter dark green */
+    --border-light: #4d4d4d;      /* Dark gray border */
+    --border-dark: #1a1a1a;       /* Almost black border for dark theme */
+    --text-accent: #ffcc00;       /* Bright yellow for accent text */
+}
+
+/* Switch Between Themes */
+body[data-theme='light'] {
+    --background: var(--background-light);
+    --text: var(--text-light);
+    --primary: var(--primary-light);
+    --border: var(--border-light);
+}
+
+body[data-theme='dark'] {
+    --background: var(--background-dark);
+    --text: var(--text-dark);
+    --primary: var(--primary-dark);
+    --border: var(--border-dark);
+}
+
+/* Page Container Styles */
+.problem-page {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: var(--background);
+}
+
+.problem-container {
+    width: 70%;
+    max-width: 800px;
+    background: var(--background);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
+    padding: 20px;
+    text-align: center;
+}
+
+/* Title and Statement */
+.problem-title {
+    font-size: 2.5em;  
+    color: var(--text-accent); /* Bright yellow */
+    margin-bottom: 20px;
+}
+
+.problem-statement {
+    background-color: #404040;  
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 6px solid #a8c8c0; 
+    border-radius: 8px;
+    color: var(--text-accent); /* Bright yellow */
+}
+
+.problem-statement h2 {
+    font-size: 1.8em;
+    color: #d0e5e5; 
+}
+
+/* Example Box */
+.example-box {
+    background-color: #505050; 
+    padding: 15px;
+    border-left: 6px solid #ff7043; 
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: var(--text-accent); /* Bright yellow */
+}
+
+.example-box h3 {
+    font-size: 1.5em;
+    color: #ffccbc; 
+}
+
+/* Code Editor Styles */
+.code-editor {
+    background-color: #282828; /* Dark background for contrast */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f8f8f2;
+    position: relative;
+    border-left: 6px solid #ffcc00; /* Bright yellow left border */
+}
+
+/* Editor Textarea */
+.code-editor textarea {
+    width: 95%;
+    height: 200px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    color: #f8f8f2;
+    background-color: #1e1e1e;
+    line-height: 1.6;
+}
+
+/* Submit Button */
+.submit-button {
+    background-color: var(--primary);
+    color: var(--text);
+    padding: 12px 24px; 
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #008b00; 
+    transform: scale(1.05); 
+}
+
+/* Result Box */
+.result-box {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 1.2em;
+    color: var(--text);
+    background-color: #b71c1c; 
+    border-radius: 8px;
+}
+
+.result-box p {
+    margin: 0;
+    font-weight: bold;
+    color: #fff; 
+}

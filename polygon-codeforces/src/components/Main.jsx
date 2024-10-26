@@ -2,7 +2,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { back } from '../../public/template';
-import './style.css';
+import '../styles/style.css';
+import Notes from './Notes';
 
 const Main = () => {
     const [tasks, setTasks] = useState([]);
@@ -32,11 +33,14 @@ const Main = () => {
             <h1> Tasks </h1>
             <div className='tasks-container'>
                 {tasks && tasks.length > 0 ? tasks.map((element, index) => (
-                    <div key={index} className='task-title'>
-                        <div className='task-id'> {element.id} </div>
-                        <div className='task-name' onClick={() => window.location.href = `/task/${element.id}`}> {element.title} </div>
-                        <div className='task-time-limit'> {element.timeLimit} (ms) </div>
+                    <div key={index} onClick={() => {window.location.href = `/task/${element.id}`}}>
+                        <Notes message={element} />
                     </div>
+                    // <div key={index} className='task-title'>
+                    //     <div className='task-id'> {element.id} </div>
+                    //     <div className='task-name' onClick={() => window.location.href = `/task/${element.id}`}> {element.title} </div>
+                    //     <div className='task-time-limit'> {element.timeLimit} (ms) </div>
+                    // </div>
                 )) : <p>No tasks available</p>}
             </div>
         </main>
