@@ -1,0 +1,109 @@
+/* Sign-In Form Styles */
+.sign-in-card {
+    margin-top: 2em;
+    display: grid;
+    width: 400px;
+    justify-self: center;
+    padding: 2.5rem; /* Increase padding for a spacious feel */
+    background: linear-gradient(145deg, #2c2c2c, #1a1a1a); /* Gradient background for the card */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow for depth */
+}
+  
+.sign-in-card h1 {
+    font-size: 2.5em; /* Larger font for the heading */
+    color: #ffcc00; /* Bright yellow for the heading */
+    margin-bottom: 1.5rem; /* Space below the heading */
+    text-align: center; /* Center the heading */
+    font-weight: 600; /* Slightly bolder font weight */
+}
+  
+.sign-in-card label {
+    display: block; /* Labels on separate lines */
+    justify-self: start;
+    margin-bottom: 0.5rem; /* Space below labels */
+    color: #e0e0e0; /* Light gray for labels */
+    font-weight: 500; /* Medium font weight for labels */
+}
+  
+.sign-in-card input {
+    display: flex;
+    width: 100%; /* Full width for inputs */
+    padding: 0.8em; /* Padding inside inputs */
+    justify-self: center;
+    margin-bottom: 1.5rem; /* Space below each input */
+    border: 1px solid #555; /* Soft border color */
+    border-radius: 6px; /* Rounded corners for inputs */
+    background-color: #3a3a3a; /* Slightly lighter dark background for inputs */
+    color: #ffffff; /* White text color for inputs */
+    font-size: 1em; /* Font size for inputs */
+    transition: border-color 0.3s, background-color 0.3s; /* Smooth transitions */
+}
+  
+.sign-in-card input:focus {
+    border-color: #ffcc00; /* Change border color to yellow on focus */
+    background-color: #444; /* Darken background on focus */
+    outline: none; /* Remove default outline */
+}
+  
+.sign-in-card button {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    width: 70%; /* Full width for button */
+    padding: 0.8em; /* Padding inside button */
+    background-color: #008CBA; /* Primary button color */
+    color: #ffffff; /* White text color for button */
+    border: none; /* No border */
+    border-radius: 6px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1em; /* Font size for button */
+    font-weight: 600; /* Bold font weight */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Smooth transitions */
+}
+  
+.sign-in-card button:hover {
+    background-color: #006F9A; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+  
+.sign-in-card .error {
+    color: #FF4D4D; /* Red color for error messages */
+    font-size: 0.9em; /* Slightly smaller font size */
+    margin-bottom: 1rem; /* Space below error messages */
+    text-align: center; /* Center error message */
+}
+  
+.footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #aaa; /* Lighter gray for footer text */
+  }
+  
+  .footer-content {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+  }
+  
+  .line {
+    flex: 1; /* Allow the lines to grow */
+    height: 1px; /* Set height for the line */
+    background-color: #555; /* Color for the line */
+    margin: 0 1rem; /* Space between the line and text */
+  }
+  
+  .footer-text {
+    color: #ffcc00; /* Link color to match heading */
+  }
+  
+  .footer a {
+    color: #ffcc00; /* Link color to match heading */
+    text-decoration: underline; /* Underline for links */
+    transition: color 0.3s; /* Smooth transition for color */
+  }
+  
+  .footer a:hover {
+    color: #f0a500; /* Change link color on hover */
+  }

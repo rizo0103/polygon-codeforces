@@ -53,7 +53,7 @@ const TaskDetail = () => {
                     
                     <div className="task-description">
                         <h2>Problem Statement</h2>
-                        <p>{task.statement}</p>
+                        <pre>{task.statement}</pre>
                     </div>
                     
                     <div className="example-task-box">
