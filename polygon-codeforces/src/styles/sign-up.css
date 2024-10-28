@@ -169,3 +169,10 @@
     width: 30px;
     height: 30px;
 }
+
+.sign-up-card .error {
+    color: #FF4D4D; /* Red color for error messages */
+    font-size: 0.9em; /* Slightly smaller font size */
+    margin-bottom: 1rem; /* Space below error messages */
+    text-align: center; /* Center error message */
+}

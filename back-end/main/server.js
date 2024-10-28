@@ -8,14 +8,16 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const tasksRoutes = require('../apis/task-apis');
+const tasksRoutes = require('../apis/tasks-apis');
+const usersRoutes = require('../apis/users-apis'); 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }))
-app.use(cors({ origin: '*', credentials: true, }));
+app.use(cors({ origin: '*' }));
 app.use('/', tasksRoutes);
+app.use('/', usersRoutes);
+app.options('*', cors());
 
 // Initialize compilex with default options
 const options = { stats: true };
