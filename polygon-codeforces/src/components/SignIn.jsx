@@ -2,21 +2,42 @@
 import React, { useState } from 'react';
 import '../styles/sign-in.css';
 import Navbar from './Navbar';
+import { back } from '../../public/template';
 
 const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(''); // State for error messages
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!username || !password) {
             setError('Both fields are required.');
             return;
         }
-        // Handle sign in logic
-        console.log('Sign In:', { username, password });
-        setError(''); // Clear error if submission is successful
+
+        try {
+            const response = await fetch(`${back}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            });
+            const data = await response.json();
+        
+            if (response.ok) {
+                window.localStorage.setItem('access-token', data.access_token);
+                window.location.href = '/';
+            } else {
+                setError(response.error);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (

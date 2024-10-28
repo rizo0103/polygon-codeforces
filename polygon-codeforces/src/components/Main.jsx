@@ -7,9 +7,11 @@ import Notes from './Notes';
 import Navbar from './Navbar';
 
 const Main = () => {
-    const [tasks, setTasks] = useState([]);
+    const token = window.localStorage.getItem('access-token');
+    const [ tasks, setTasks ] = useState([]);
+    const [ userData, setUserData ] = useState();
 
-    const getData = async () => {
+    const getTasks = async () => {
         try {
             const response = await fetch(`${back}/get-tasks-list`, {
                 method: 'GET',
@@ -17,21 +19,40 @@ const Main = () => {
                     'Content-Type': 'application/json',
                 },
             });
+    
+            if (!response.ok) {
+                throw new Error('Failed to fetch tasks list');
+            }
+    
             const data = await response.json();
-
             setTasks(data.results);
+    
+            const userResponse = await fetch(`${back}/get-user-data`, {
+                method: 'GET',
+                headers: {
+                    'authorization': `Bearer ${token}`, // Make sure token is valid
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (!userResponse.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+    
+            const userData = await userResponse.json();
+            setUserData(userData.data);
         } catch (error) {
             console.error(error);
         }
     };
     
     useEffect(() => {
-        getData();
+        getTasks();
     }, []);
 
     return (
         <main className='main-page'>
-            <Navbar />
+            <Navbar message={{ userData }} />
             <h1> Tasks </h1>
             <div className='tasks-container'>
                 {tasks && tasks.length > 0 ? tasks.map((element, index) => (
