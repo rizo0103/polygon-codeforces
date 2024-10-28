@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { back } from '../../public/template';
 import '../styles/style.css';
 import Notes from './Notes';
+import Navbar from './Navbar';
 
 const Main = () => {
     const [tasks, setTasks] = useState([]);
@@ -30,6 +31,7 @@ const Main = () => {
 
     return (
         <main className='main-page'>
+            <Navbar />
             <h1> Tasks </h1>
             <div className='tasks-container'>
                 {tasks && tasks.length > 0 ? tasks.map((element, index) => (

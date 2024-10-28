@@ -6,6 +6,7 @@ import { back } from '../../public/template';
 import '../styles/style.css';
 import '../styles/task-page.css';
 import '../styles/navbar.css';
+import Navbar from './Navbar';
 
 const TaskDetail = () => {
     const { id } = useParams();
@@ -45,14 +46,7 @@ const TaskDetail = () => {
 
     return (
         <div>
-            <nav className="navbar">
-                <div className="navbar-left">
-                    <a href="/">Main Page</a>
-                </div>
-                <div className="navbar-right">
-                    <a href="/profile">Profile</a>
-                </div>
-            </nav>
+            <Navbar />
             <main className="task-page">
                 <div className="task-container">
                     <h1 className="task-title">{task.title}</h1>
