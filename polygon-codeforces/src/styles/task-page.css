@@ -1,95 +1,72 @@
-/* Base Styles */
-body {
-    margin: 0;
-    font-family: 'Comic Sans MS', cursive, sans-serif; /* Cartoon-style font */
-}
-
-/* Theme Variables */
-:root {
-    --background-light: #7a7a7a;  /* Darker light background */
-    --background-dark: #000000;   /* Deep black background */
-    --text-light: #2c2c2c;        /* Very dark text for light theme */
-    --text-dark: #e5e5e5;         /* Lighter text for dark theme */
-    --primary-light: #2c9a29;     /* Dark green */
-    --primary-dark: #66bb6a;      /* Slightly brighter dark green */
-    --border-light: #4d4d4d;      /* Dark gray border */
-    --border-dark: #1a1a1a;       /* Almost black border for dark theme */
-    --text-accent: #ffcc00;       /* Bright yellow for accent text */
-}
-
-/* Switch Between Themes */
-body[data-theme='light'] {
-    --background: var(--background-light);
-    --text: var(--text-light);
-    --primary: var(--primary-light);
-    --border: var(--border-light);
-}
-
-body[data-theme='dark'] {
-    --background: var(--background-dark);
-    --text: var(--text-dark);
-    --primary: var(--primary-dark);
-    --border: var(--border-dark);
-}
-
-/* Page Container Styles */
-.problem-page {
+/* Task Page Styles */
+.task-page {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     padding: 20px;
-    background: var(--background);
+    background: var(--background); /* Deep black background */
+    min-height: 100vh; /* Full height */
 }
 
-.problem-container {
+/* Task Container */
+.task-container {
     width: 70%;
     max-width: 800px;
-    background: var(--background);
+    background: #2a2a2a; /* Darker background for the container */
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 1);
-    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Strong shadow for depth */
+    padding: 25px; /* Added padding for spacing */
     text-align: center;
 }
 
-/* Title and Statement */
-.problem-title {
-    font-size: 2.5em;  
-    color: var(--text-accent); /* Bright yellow */
+/* Task Title */
+.task-title {
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.8em;  
+    color: var(--text-accent); /* Bright yellow for standout title */
     margin-bottom: 20px;
+    background-color: transparent;
 }
 
-.problem-statement {
-    background-color: #404040;  
+/* Task Description */
+.task-description {
+    background-color: #3c3c3c;  /* Dark gray for contrast */
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 6px solid #66bb6a; /* Lighter green for border */
+    border-radius: 10px; /* Slightly more rounded corners */
+    color: var(--text-accent); /* Bright yellow for text */
+}
+
+/* Task Description Heading */
+.task-description h2 {
+    font-size: 2em;
+    color: #d0e5e5; /* Lighter color for the heading */
+}
+
+/* Example Task Box */
+.example-task-box {
+    background-color: #444444; 
     padding: 15px;
-    margin: 15px 0;
-    border-left: 6px solid #a8c8c0; 
-    border-radius: 8px;
-    color: var(--text-accent); /* Bright yellow */
-}
-
-.problem-statement h2 {
-    font-size: 1.8em;
-    color: #d0e5e5; 
-}
-
-/* Example Box */
-.example-box {
-    background-color: #505050; 
-    padding: 15px;
-    border-left: 6px solid #ff7043; 
+    border-left: 6px solid #ff7043; /* Vibrant orange for attention */
     border-radius: 8px;
     margin-bottom: 20px;
     color: var(--text-accent); /* Bright yellow */
 }
 
-.example-box h3 {
-    font-size: 1.5em;
-    color: #ffccbc; 
+/* Example Task Box Heading */
+.example-task-box h3 {
+    font-size: 1.6em; /* Increased size for visibility */
+    color: #ffccbc; /* Soft peach color */
 }
 
-/* Code Editor Styles */
+/* Code Editor */
 .code-editor {
-    background-color: #282828; /* Dark background for contrast */
-    padding: 10px;
+    background-color: #282828; /* Dark background */
+    padding: 15px;
     border-radius: 8px;
     border: 1px solid var(--border);
     margin-bottom: 15px;
@@ -108,20 +85,25 @@ body[data-theme='dark'] {
     border: none;
     outline: none;
     resize: vertical;
-    color: #f8f8f2;
-    background-color: #1e1e1e;
+    color: #f8f8f2; /* Light color for text */
+    background-color: #1e1e1e; /* Darker area for textarea */
     line-height: 1.6;
+}
+
+.code-editor h3 {
+    color: #ffcc00;
 }
 
 /* Submit Button */
 .submit-button {
+    align-self: center;
     background-color: var(--primary);
     color: var(--text);
     padding: 12px 24px; 
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1.3em; /* Slightly larger for emphasis */
     transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -134,7 +116,7 @@ body[data-theme='dark'] {
 .result-box {
     margin-top: 20px;
     padding: 15px;
-    font-size: 1.2em;
+    font-size: 1.3em; /* Increased font size for visibility */
     color: var(--text);
     background-color: #b71c1c; 
     border-radius: 8px;

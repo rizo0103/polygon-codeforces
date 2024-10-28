@@ -53,16 +53,16 @@ const TaskDetail = () => {
                     <a href="/profile">Profile</a>
                 </div>
             </nav>
-            <main className="problem-page">
-                <div className="problem-container">
-                    <h1 className="problem-title">{task.title}</h1>
+            <main className="task-page">
+                <div className="task-container">
+                    <h1 className="task-title">{task.title}</h1>
                     
-                    <div className="problem-statement">
+                    <div className="task-description">
                         <h2>Problem Statement</h2>
                         <p>{task.statement}</p>
                     </div>
                     
-                    <div className="example-box">
+                    <div className="example-task-box">
                         <h3>Example</h3>
                         <p><strong>Input:</strong> {JSON.parse(input)[0]}</p>
                         <p><strong>Output:</strong> {JSON.parse(output)[0]}</p>
@@ -81,9 +81,9 @@ const TaskDetail = () => {
                     <button className="submit-button" onClick={handleSubmit}>Submit Solution</button>
 
                     {/* Result Section */}
-                    {/* <div className="result-box">
+                    <div className="result-box">
                         <p>OK</p>
-                    </div> */}
+                    </div>
                 </div>
             </main>
 
