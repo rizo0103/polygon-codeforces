@@ -4,6 +4,7 @@ import Main from './components/Main'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TaskDetail from './components/TaskDetail';
 import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path = '/add-task' element = {<AddTask />} />
         <Route path = '/task/:id' element = {<TaskDetail />} />
         <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/sign-up' element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   )

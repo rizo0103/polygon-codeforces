@@ -1,33 +1,33 @@
-/* Sign-In Form Styles */
-.sign-in-card {
+/* Sign-Up Form Styles */
+.sign-up-card {
     margin-top: 2em;
+    font-family: Comic Sans ms, "sans-serif", cursive;
     display: grid;
-    font-family: Comic Sans MS, sans-serif, cursive;
-    width: 400px;
+    width: 500px;
     justify-self: center;
     padding: 2.5rem; /* Increase padding for a spacious feel */
     background: linear-gradient(145deg, #2c2c2c, #1a1a1a); /* Gradient background for the card */
     border-radius: 12px; /* Rounded corners */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Deeper shadow for depth */
-}
+  }
   
-.sign-in-card h1 {
+  .sign-up-card h1 {
     font-size: 2.5em; /* Larger font for the heading */
     color: #ffcc00; /* Bright yellow for the heading */
     margin-bottom: 1.5rem; /* Space below the heading */
     text-align: center; /* Center the heading */
     font-weight: 600; /* Slightly bolder font weight */
-}
+  }
   
-.sign-in-card label {
+  .sign-up-card label {
     display: block; /* Labels on separate lines */
     justify-self: start;
     margin-bottom: 0.5rem; /* Space below labels */
     color: #e0e0e0; /* Light gray for labels */
     font-weight: 500; /* Medium font weight for labels */
-}
+  }
   
-.sign-in-card input {
+  .sign-up-card input {
     display: flex;
     width: 100%; /* Full width for inputs */
     padding: 0.8em; /* Padding inside inputs */
@@ -39,15 +39,15 @@
     color: #ffffff; /* White text color for inputs */
     font-size: 1em; /* Font size for inputs */
     transition: border-color 0.3s, background-color 0.3s; /* Smooth transitions */
-}
+  }
   
-.sign-in-card input:focus {
+  .sign-up-card input:focus {
     border-color: #ffcc00; /* Change border color to yellow on focus */
     background-color: #444; /* Darken background on focus */
     outline: none; /* Remove default outline */
-}
+  }
   
-.sign-in-card button {
+  .sign-up-card button {
     display: flex;
     justify-content: center;
     justify-self: center;
@@ -61,22 +61,15 @@
     font-size: 1em; /* Font size for button */
     font-weight: 600; /* Bold font weight */
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Smooth transitions */
-}
+  }
   
-.sign-in-card button:hover {
+  .sign-up-card button:hover {
     background-color: #006F9A; /* Darker shade on hover */
     transform: translateY(-2px); /* Slight lift effect */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-}
+  }
   
-.sign-in-card .error {
-    color: #FF4D4D; /* Red color for error messages */
-    font-size: 0.9em; /* Slightly smaller font size */
-    margin-bottom: 1rem; /* Space below error messages */
-    text-align: center; /* Center error message */
-}
-  
-.footer {
+  .footer {
     text-align: center;
     margin-top: 1.5rem;
     color: #aaa; /* Lighter gray for footer text */
@@ -108,3 +101,71 @@
   .footer a:hover {
     color: #f0a500; /* Change link color on hover */
   }
+  
+.password-group {
+    display: flex; /* Use flexbox to align password fields */
+    justify-content: space-between; /* Space between the two fields */
+    margin-bottom: 1.5rem; /* Space below the password group */
+    gap: 5%;
+}
+  
+.password-field {
+    flex: 1; /* Allow fields to take equal space */
+    margin-right: 1rem; /* Space between the two fields */
+}
+  
+.password-field:last-child {
+    margin-right: 0; /* Remove margin from the last field */
+}
+
+.avatar-container {
+    justify-self: center;
+    width: 100px; /* Set a fixed width for the avatar container */
+    height: 100px; /* Set a fixed height for the avatar container */
+    border: 2px dashed #555; /* Dashed border */
+    border-radius: 50%; /* Make the container circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a3a3a; /* Background color */
+    cursor: pointer; /* Change cursor to pointer */
+    margin-bottom: 1.5rem; /* Space below the avatar container */
+    transition: background-color 0.3s; /* Smooth background transition */
+    overflow: hidden; /* Hide overflow to keep the image within the circular shape */
+}
+  
+.avatar-container:hover {
+    background-color: #444; /* Darken background on hover */
+}
+  
+.avatar-preview {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Use cover to fill the container */
+    border-radius: 50%; /* Keep the image circular */
+    image-rendering: auto; /* Default rendering */
+    image-rendering: crisp-edges; /* Option for sharper image */
+    image-rendering: pixelated; /* Option for pixelated look if desired */
+}
+  
+.avatar-placeholder {
+    color: #e0e0e0; /* Light gray for placeholder text */
+    font-size: 1em; /* Font size for placeholder text */
+    text-align: center; /* Center placeholder text */
+}
+
+.password-visibility {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+}
+
+.password-visibility img {
+    display: flex;
+    width: 30px;
+    height: 30px;
+}
