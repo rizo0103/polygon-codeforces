@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/sign-in.css';
 import Navbar from './Navbar';
 import { back } from '../../public/template';
@@ -8,6 +8,12 @@ const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(''); // State for error messages
+
+    useEffect(() => {
+        if (window.localStorage.getItem('access-token')) {
+            window.location.href = '/';
+        }
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();

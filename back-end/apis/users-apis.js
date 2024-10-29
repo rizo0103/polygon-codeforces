@@ -13,7 +13,8 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, '../../polygon-codeforces/public/avatars'));
     },
     filename: (req, file, cb) => {
-        cb(null, `${file.originalname}`);
+        const username = req.body.username;
+        cb(null, `${username}-${file.originalname}`);
     }
 });
 
@@ -22,8 +23,9 @@ const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
         const fileTypes = /jpeg|jpg|png/;
+        const username = req.body.username;
         const mimeType = fileTypes.test(file.mimetype); // Corrected typo (was `file.mimeType`)
-        const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+        const extname = fileTypes.test(path.extname(`${username}-${file.originalname}`).toLowerCase());
 
         if (mimeType && extname) {
             return cb(null, true);
@@ -40,7 +42,7 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
 
     try {
         const sql = `INSERT INTO users (username, password, fullname, avatarTitle, email, solvedTasks, unsolvedTasks) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        const values = [username, password, fullname, `${username}-${avatarTitle}`, email, "[]", "[]"];
+        const values = [username, password, fullname, avatarTitle || 'defaultAvatar.png', email, "[]", "[]"];
 
         db.query(sql, values, (err, results) => {
             if (err) {

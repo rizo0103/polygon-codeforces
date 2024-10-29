@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/sign-up.css';
 import Navbar from './Navbar';
 import { back, canSee, cantSee } from '../../public/template';
 
 const SignUp = () => {
     const [avatar, setAvatar] = useState(null); // Track file object, not dataURL
-    const [avatarTitle, setAvatarTitle] = useState('');
     const [username, setUsername] = useState('');
     const [fullname, setFullname] = useState('');
     const [email, setEmail] = useState('');
@@ -16,6 +15,12 @@ const SignUp = () => {
     const [passwordType, setPasswordType] = useState('password');
     const [error, setError] = useState('');
 
+    useEffect(() => {
+        if (window.localStorage.getItem('access-token')) {
+            window.location.href = '/';
+        }
+    });
+
     const passwordVisible = () => {
         setPasswordVisibility(!passwordVisibility);
         setPasswordType(passwordVisibility ? 'password' : 'text');
@@ -24,7 +29,6 @@ const SignUp = () => {
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
         setAvatar(file); // Save file object for upload
-        setAvatarTitle(file ? file.name : '');
     };
 
     const onSubmit = async (e) => {

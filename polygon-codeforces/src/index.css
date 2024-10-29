@@ -71,3 +71,55 @@ button:focus-visible {
 .btn-primary {
     background-color: #008CBA;
 }
+
+.avatar-container {
+    justify-self: center;
+    width: 100px; /* Set a fixed width for the avatar container */
+    height: 100px; /* Set a fixed height for the avatar container */
+    border: 2px dashed #555; /* Dashed border */
+    border-radius: 50%; /* Make the container circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a3a3a; /* Background color */
+    cursor: pointer; /* Change cursor to pointer */
+    margin-bottom: 1.5rem; /* Space below the avatar container */
+    transition: background-color 0.3s; /* Smooth background transition */
+    overflow: hidden; /* Hide overflow to keep the image within the circular shape */
+}
+  
+.avatar-container:hover {
+    background-color: #444; /* Darken background on hover */
+}
+  
+.avatar-preview {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Use cover to fill the container */
+    border-radius: 50%; /* Keep the image circular */
+    image-rendering: auto; /* Default rendering */
+    image-rendering: crisp-edges; /* Option for sharper image */
+    image-rendering: pixelated; /* Option for pixelated look if desired */
+}
+  
+.avatar-placeholder {
+    color: #e0e0e0; /* Light gray for placeholder text */
+    font-size: 1em; /* Font size for placeholder text */
+    text-align: center; /* Center placeholder text */
+}
+
+.avatar-container2 {
+    justify-self: center;
+    width: 50px; /* Set a fixed width for the avatar container */
+    height: 50px; /* Set a fixed height for the avatar container */
+    border: 2px dashed #555; /* Dashed border */
+    border-radius: 50%; /* Make the container circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a3a3a; /* Background color */
+    cursor: pointer; /* Change cursor to pointer */
+    margin-bottom: 1.5rem; /* Space below the avatar container */
+    transition: background-color 0.3s; /* Smooth background transition */
+    overflow: hidden; /* Hide overflow to keep the image within the circular shape */
+}
