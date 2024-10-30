@@ -5,32 +5,17 @@ import '../styles/profile.css';
 import { img_dir } from "../../public/template";
 
 const Profile = ({ message }) => {
-    const [isEditing, setIsEditing] = useState(false);
-    const [editUsername, setEditUsername] = useState(message.username);
-    const [editFullname, setEditFullname] = useState(message.fullname);
-    const [editEmail, setEditEmail] = useState(message.email);
-    const [editAvatar, setEditAvatar] = useState(message.avatarTitle);
-
-    const handleEditClick = () => setIsEditing(true);
-    const handleSaveClick = () => setIsEditing(false);
-
-    useEffect(() => {
-        setEditUsername(message.username);
-        setEditAvatar(message.avatarTitle);
-        setEditEmail(message.email);
-        setEditFullname(message.fullname);
-    }, [editAvatar, editEmail, editFullname, editUsername, message]);
 
     return (
         <div className="profile-page-container">
             <div className="profile-avatar-container">
-                <img src={`${img_dir}${editAvatar}`} alt="Profile Picture" className="profile-avatar" />
+                <img src={`${img_dir}${message.avatarTitle}`} alt="Profile Picture" className="profile-avatar" />
             </div>
             <div className="profile-info-container">
                 <h2 className="profile-title">Profile</h2>
-                <p className="profile-detail profile-name">Name: John Doe</p>
-                <p className="profile-detail profile-email">Email: john.doe@example.com</p>
-                <p className="profile-detail profile-score">Total Score: 150</p>
+                <p className="profile-detail profile-name">Name: {message.fullname}</p>
+                <p className="profile-detail profile-email">Email: {message.email}</p>
+                <p className="profile-detail profile-score">Total Score: {message.score}</p>
             </div>
             <div className="tasks-container1">
                 <h2 className="tasks-title">Tasks</h2>

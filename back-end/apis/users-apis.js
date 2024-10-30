@@ -41,8 +41,8 @@ router.post('/register', upload.single('avatar'), async (req, res) => {
     const avatarTitle = req.file ? req.file.filename : null;
 
     try {
-        const sql = `INSERT INTO users (username, password, fullname, avatarTitle, email, solvedTasks, unsolvedTasks) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        const values = [username, password, fullname, avatarTitle || 'defaultAvatar.png', email, "[]", "[]"];
+        const sql = `INSERT INTO users (username, password, fullname, avatarTitle, email, tasks) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        const values = [username, password, fullname, avatarTitle || 'defaultAvatar.png', email, "[]"];
 
         db.query(sql, values, (err, results) => {
             if (err) {

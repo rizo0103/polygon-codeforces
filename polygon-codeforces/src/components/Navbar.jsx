@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/navbar.css';
 import { img_dir } from '../../public/template';
 
@@ -12,10 +12,10 @@ const Navbar = ({ message }) => {
                 <a href="/">Main Page</a>
             </div>
             <div className="navbar-right">
-                {message && message.userData ? (
+                {message ? (
                     <div className="profile-container">
                         <div style={{ margin: 'auto' }} className='avatar-container2'>
-                            <img className='avatar-preview' src={`${img_dir}${message.userData.avatarTitle}`} />
+                            <img className='avatar-preview' src={`${img_dir}${message.avatarTitle}`} />
                         </div>
                         <div className="dropdown-menu">
                             <a href="/profile">My Profile</a>

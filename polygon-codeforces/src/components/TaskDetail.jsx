@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
@@ -8,12 +9,17 @@ import '../styles/task-page.css';
 import '../styles/navbar.css';
 import Navbar from './Navbar';
 
-const TaskDetail = () => {
+const TaskDetail = ({message}) => {
     const { id } = useParams();
     const [ code, setCode ] = useState('');
     const [ input, setInput ] = useState([]);
     const [ output, setOutput ] = useState([]);
-    const [task, setTask] = useState(null);
+    const [ task, setTask ] = useState(null);
+    const [ userData, setUserData ] = useState('');
+
+    useEffect(() => {
+        setUserData(message);
+    }, [message, userData]);
 
     const getTaskDetails = async () => {
         try {
@@ -32,8 +38,10 @@ const TaskDetail = () => {
         }
     };
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        console.log(code);
     }
 
     useEffect(() => {
@@ -46,8 +54,8 @@ const TaskDetail = () => {
 
     return (
         <div>
-            <Navbar />
-            <main className="task-page">
+            <Navbar message={userData} />
+            <form className="task-page" onSubmit={handleSubmit}>
                 <div className="task-container">
                     <h1 className="task-title">{task.title}</h1>
                     
@@ -64,22 +72,17 @@ const TaskDetail = () => {
                     
                     <div className="code-editor">
                         <h3>Your Code</h3>
-                        <textarea 
-                            value={code} 
-                            onChange={(e) => setCode(e.target.value)} 
-                            rows="10" 
-                            placeholder="Write your solution here..." 
-                        />
+                        <textarea value={code} onChange={(e) => setCode(e.target.value)} rows="10" placeholder="Write your solution here..." />
                     </div>
                     
-                    <button className="submit-button" onClick={handleSubmit}>Submit Solution</button>
+                    <button className="submit-button">Submit Solution</button>
 
                     {/* Result Section */}
                     <div className="result-box">
-                        <p>OK</p>
+                        <p>Wrong answer 10</p>
                     </div>
                 </div>
-            </main>
+            </form>
 
         </div>
     );

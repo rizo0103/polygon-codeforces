@@ -36,6 +36,7 @@
     background-color: #3c3c3c;  /* Dark gray for contrast */
     padding: 20px;
     margin: 20px 0;
+    font-size: large;
     border-left: 6px solid #66bb6a; /* Lighter green for border */
     border-radius: 10px; /* Slightly more rounded corners */
     color: var(--text-accent); /* Bright yellow for text */

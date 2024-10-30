@@ -49,7 +49,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Main />} />
                 <Route path='/add-task' element={<AddTask />} />
-                <Route path='/task/:id' element={<TaskDetail />} />
+                <Route path='/task/:id' element={<TaskDetail message={userData} />} />
                 <Route path='/sign-in' element={<SignIn />} />
                 <Route path='/sign-up' element={<SignUp />} />
                 <Route path='/profile' element={<Profile message= {userData} />} />

@@ -53,7 +53,7 @@ const Main = () => {
 
     return (
         <main className='main-page'>
-            <Navbar message={{ userData }} />
+            <Navbar message={ userData } />
             <h1> Tasks </h1>
             <div className='tasks-container'>
                 {tasks && tasks.length > 0 ? tasks.map((element, index) => (
