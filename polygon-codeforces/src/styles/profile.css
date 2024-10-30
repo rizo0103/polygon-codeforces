@@ -1,0 +1,152 @@
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+    color: #ffcc00;
+    min-height: 100%;
+    padding: 16px;
+    font-family: 'Comic Sans MS', cursive;
+    align-items: center;
+}
+  
+.profile-avatar-container {
+    justify-self: center;
+    width: 200px; /* Set a fixed width for the avatar container */
+    height: 200px; /* Set a fixed height for the avatar container */
+    border: 2px solid #ffcc00; /* Dashed border */
+    border-radius: 50%; /* Make the container circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3a3a3a; /* Background color */
+    cursor: pointer; /* Change cursor to pointer */
+    margin-bottom: 1.5rem; /* Space below the avatar container */
+    transition: background-color 0.3s; /* Smooth background transition */
+    overflow: hidden; /* Hide overflow to keep the image within the circular shape */
+}
+  
+.profile-avatar {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    object-fit: cover; /* Use cover to fill the container */
+    border-radius: 50%; /* Keep the image circular */
+    image-rendering: auto; /* Default rendering */
+    image-rendering: crisp-edges; /* Option for sharper image */
+    image-rendering: pixelated; /* Option for pixelated look if desired */
+}
+  
+.profile-info-container {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+    background-color: #1a1a1a;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+    border: 2px solid #ffcc00;
+}
+  
+.profile-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #66bb6a;
+    margin-bottom: 8px;
+}
+  
+.profile-detail {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+}
+  
+.profile-name {
+    color: #1e90ff;
+}
+  
+.profile-email {
+    color: #ff4500;
+}
+  
+.profile-score {
+    color: #9370db;
+}
+  
+.tasks-container1 {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+    border: 2px solid #ffcc00;
+}
+  
+.tasks-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #66bb6a;
+    margin-bottom: 16px;
+}
+  
+.tasks-header {
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    width: 60%;
+    justify-self: center;
+    margin-bottom: 8px;
+}
+  
+.task-header {
+    display: flex;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+}
+
+.task-title1 {
+    color: #1e90ff;
+}
+  
+.task-name {
+    color: #1e90ff;
+}
+  
+.task-solved {
+    color: #ff4500;
+}
+  
+.task-unsolved {
+    color: #9370db;
+}
+  
+.task-status {
+    color: #ff8c00;
+}
+  
+.tasks-list {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+  
+.task-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
+}
+  
+.task-details {
+    display: flex;
+    justify-content: space-between;
+}
+  
+  .task-detail {
+    font-size: 1.25rem;
+    flex: 1;
+    text-align: center;
+  }
+  
