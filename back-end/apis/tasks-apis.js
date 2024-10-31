@@ -130,7 +130,7 @@ router.post('/add-solution', async (req, res) => {
             });
 
             if (!taskExists) {
-                tasksArray.push({ id: id, verdict: verdict });
+                tasksArray.unshift({ id: id, verdict: verdict });
             }
 
             const sqlUpdate = `UPDATE users SET tasks = ? WHERE username = ?`;
