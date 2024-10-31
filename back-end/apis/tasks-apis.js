@@ -13,45 +13,55 @@ router.get('/test', async (req, res) => {
     }
 });
 
-router.post('/compile', async(req, res) => {
+router.post('/compile', async (req, res) => {
     const { code, id } = req.body;
     const envData = { OS: "windows", cmd: "g++", options: { timeout: 10000 } };
 
     try {
-
-        const sql = `SELECT * FROM tasks WHERE id = ${id}`;
-        let inputData = [], outputData = [];
-
-        tasks.query(sql, async(err, results) => {
+        const sql = `SELECT * FROM tasks WHERE id = ?`;
+        tasks.query(sql, [id], async (err, results) => {
             if (err) {
                 console.error(err);
                 return res.status(422).json({ message: `db error ${err}` });
             }
-            inputData = [...results];
-            outputData = [...results];
-            let str = inputData[0].inputs;
-            let otr = outputData[0].outputs;
-            str = JSON.parse(str);
-            otr = JSON.parse(otr);
-            let ans = [];
-            for (let i = 0; i < str.length; ++i) {
-                compiler.compileCPPWithInput(envData, code, str[i], async (data) => {
-                    if (data.error) {
-                        return res.status(500).json({ error: data.error });
-                    } else {
-                        if (data.output === otr[i]) {
-                            // console.log("correct");
-                            ans[i] = "correct";
-                            // return res.json({ output: 'correct' });
-                        } else {
-                            ans[i] = 'incorrect';
-                            // console.log("incorrect");
+
+            if (results.length === 0) {
+                return res.status(404).json({ message: 'Task not found' });
+            }
+
+            const inputData = JSON.parse(results[0].inputs);
+            const outputData = JSON.parse(results[0].outputs);
+
+            // Function to handle individual compilation
+            const compileCode = (input, expectedOutput) => {
+                return new Promise((resolve, reject) => {
+                    compiler.compileCPPWithInput(envData, code, input, (data) => {
+                        if (data.error) {
+                            return reject(data.error);
                         }
-                    }
-                    if (i === str.length - 1) {
-                        return res.status(200).json({ answers: ans });
-                    }
+                        if (data.output.trim() !== expectedOutput.trim()) {
+                            return resolve(`Wrong answer on test case with input: ${input}`);
+                        }
+                        resolve(null);  // null indicates no error
+                    });
                 });
+            };
+
+            try {
+                for (let i = 0; i < inputData.length; i++) {
+                    const result = await compileCode(inputData[i], outputData[i]);
+                    if (result) {
+                        return res.json({ output: result });
+                    }
+                }
+
+                // If all tests pass
+                compiler.flush(() => {
+                    console.log("flushed");
+                })
+                res.json({ output: 'All test cases passed' });
+            } catch (compileError) {
+                return res.status(500).json({ error: compileError });
             }
         });
     } catch (error) {

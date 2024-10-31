@@ -38,10 +38,32 @@ const TaskDetail = ({message}) => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         
-        console.log(code);
+        if (!code) {
+            alert('Write code first');
+            return ;
+        }
+
+        try {
+            const response = await fetch(`${back}/compile`, {
+                method: 'POSt',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    code: code,
+                    username: userData.username,
+                    id: task.id,
+                }),
+            });
+
+            const output = await response.json();
+            console.log(output);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     useEffect(() => {
