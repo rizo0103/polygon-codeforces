@@ -16,9 +16,15 @@ const TaskDetail = ({message}) => {
     const [ output, setOutput ] = useState([]);
     const [ task, setTask ] = useState(null);
     const [ userData, setUserData ] = useState('');
+    const [ verdict, setVerdict ] = useState([]);
+    const [ color, setColor ] = useState("#b71c1c");
 
     useEffect(() => {
         setUserData(message);
+        const userTasks = message.tasks ? JSON.parse(message.tasks) : [];
+        const filteredVerdict = userTasks.filter(item => item.id === task.id);
+    
+        setVerdict(filteredVerdict);
     }, [message, userData]);
 
     const getTaskDetails = async () => {
@@ -29,10 +35,16 @@ const TaskDetail = ({message}) => {
                     'Content-Type': 'application/json',
                 },
             });
-            const data = await response.json();
-            setTask(data.results[0]);
-            setInput(data.results[0].inputs);
-            setOutput(data.results[0].outputs);
+            
+            if (response.ok) {
+                const data = await response.json();
+    
+                await setTask(data.results[0]);
+                await setInput(data.results[0].inputs);
+                await setOutput(data.results[0].outputs);
+                
+            }
+    
         } catch (error) {
             console.error(error);
         }
@@ -40,17 +52,18 @@ const TaskDetail = ({message}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+    
         if (!code) {
             alert('Write code first');
-            return ;
+            return;
         }
-
+    
         try {
+            // Compile the code
             const response = await fetch(`${back}/compile`, {
-                method: 'POSt',
+                method: 'POST',
                 headers: {
-                    'content-type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     code: code,
@@ -58,13 +71,35 @@ const TaskDetail = ({message}) => {
                     id: task.id,
                 }),
             });
-
+    
             const output = await response.json();
-            console.log(output);
+            setVerdict(output.output);
+    
+            // Ensure verdict is set before making the next request
+            const verdict = output.output;
+    
+            // Add the solution
+            const newResponse = await fetch(`${back}/add-solution`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: task.id,
+                    username: userData.username,
+                    verdict: verdict,
+                }),
+            });
+    
+            if (newResponse.ok) {
+                window.location.reload();
+            } else {
+                console.error('Failed to add solution');
+            }
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     useEffect(() => {
         getTaskDetails();
@@ -100,9 +135,11 @@ const TaskDetail = ({message}) => {
                     <button className="submit-button">Submit Solution</button>
 
                     {/* Result Section */}
-                    <div className="result-box">
-                        <p>Wrong answer 10</p>
-                    </div>
+                    {verdict[0] && (
+                        <div className="result-box" style={{ background: verdict[0].verdict === 'All test cases passed' ? "green" : color }}>
+                            <p>{verdict[0].verdict}</p>
+                        </div>
+                    )}
                 </div>
             </form>
 

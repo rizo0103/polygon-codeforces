@@ -98,6 +98,58 @@ router.post('/add-task', async(req, res) => {
     }
 });
 
+router.post('/add-solution', async (req, res) => {
+    const { id, username, verdict } = req.body;
+
+    try {
+        if (!id || !username || !verdict) {
+            return res.status(400).json({ message: 'Seems something is missing' });
+        }
+
+        const sqlSelect = `SELECT * FROM users WHERE username = ?`;
+
+        tasks.query(sqlSelect, [username], async (err, results) => {
+            if (err) {
+                console.error(err);
+                return res.status(422).json({ message: `db error ${err}` });
+            }
+
+            if (results.length === 0) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            let tasksArray = JSON.parse(results[0].tasks);
+            let taskExists = false;
+
+            tasksArray = tasksArray.map(task => {
+                if (task.id === id) {
+                    taskExists = true;
+                    return { id: id, verdict: verdict };
+                }
+                return task;
+            });
+
+            if (!taskExists) {
+                tasksArray.push({ id: id, verdict: verdict });
+            }
+
+            const sqlUpdate = `UPDATE users SET tasks = ? WHERE username = ?`;
+            tasks.query(sqlUpdate, [JSON.stringify(tasksArray), username], (err, updateResult) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(422).json({ message: `db error ${err}` });
+                }
+
+                return res.status(201).json({ message: 'ok', results: updateResult });
+            });
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error: ' + error });
+    }
+});
+
+
 router.get('/get-tasks-list', async(req, res) => {
     try {
         const sql = `SELECT * FROM tasks`;
