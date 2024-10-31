@@ -58,7 +58,7 @@ const Main = () => {
             <div className='tasks-container'>
                 {tasks && tasks.length > 0 ? tasks.map((element, index) => (
                     <div key={index} onClick={() => {window.location.href = `/task/${element.id}`}}>
-                        <Notes message={element} />
+                        <Notes message={element} data = {userData} />
                     </div>
                     // <div key={index} className='task-title'>
                     //     <div className='task-id'> {element.id} </div>
